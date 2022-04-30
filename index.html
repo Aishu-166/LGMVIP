@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				margin: 0px;
+			}
+
+        	/* Create three equal columns that float next to each other */
+        	.column {
+				float: left;
+				width: 45.00%;
+				padding: 2.5%;
+			}
+
+			/* Clear floats after the columns */
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+
+			.row {
+				height: 25%;
+			}
+
+        	/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+        	@media screen and (max-width: 600px) {
+        		.column {
+            		width: 100%;
+        		}
+        	}
+
+			input {
+				padding: 5px;
+				margin: 5px;
+				border-radius: 5px;
+				border-width: 2px;
+			}
+
+			.submit {
+				background-color: rgb(50, 116, 240);
+				padding-top: 2%;
+				padding-bottom: 2%;
+				padding-left: 3%;
+				padding-right: 3%;
+				border: none;
+				color: white;
+			}
+
+			.clear {
+				background-color: rgb(201, 0, 0);
+				padding-top: 2%;
+				padding-bottom: 2%;
+				padding-left: 3%;
+				padding-right: 3%;
+				border: none;
+				color: white;
+			}
+
+
+			.vl {
+				border-left: 2px solid rgba(70, 247, 202, 0.432);
+				height: 50%;
+				position: absolute;
+				left: 50%;
+				margin-left: -3px;
+				top: 25%;
+				bottom: 25%;
+				border-radius: 5;
+			}
+
+			.partition-heading {
+				text-align: center;
+				
+			}
+
+			.results, .results-tr, .results-td {
+				border: 1px solid green;
+				border-collapse: collapse;
+				padding: 5px;
+				width: 100%;
+			}
+
+			.results-tr:nth-child(even) {background-color: white;}
+
+			.results-tr:nth-child(odd) {background-color: rgb(200, 226, 148);}
+
+			#table-head {
+				background-color: green;
+			}
+
+			header {
+				text-align: center;
+				background-color: rgb(48, 206, 153);
+				padding: 5px;
+				margin-top: none;
+				color: white;
+			}
+
+
+		</style>
+		<script>
+			function enroll() {
+				var name = document.getElementById("name").value;
+				var email = document.getElementById("email").value;
+				var site = document.getElementById("site").value;
+				var link = document.getElementById("link").value;
+				var radios = document.getElementsByName("gender");
+				var gender = Array.from(radios).find(radio=>radio.checked).value;
+				var boxes = document.querySelectorAll('input[type="checkbox"]:checked');
+				var skills = [];
+				for (var checkbox of boxes){
+					skills.push(checkbox.value)
+				}
+				
+				var table = document.getElementById('results');
+				var rowCount = table.rows.length;
+				var row = table.insertRow(rowCount);
+				row.className = 'results-tr'
+				
+				var descCell = row.insertCell(0);
+				descCell.innerHTML = '<b>'+name+'</b><br>'+gender+'<br>'+email+'<br><a href=\''+site+'\'>' +site+'</a><br>'+skills;
+				descCell.className = 'results-td'
+
+				var imgCell = row.insertCell(1);
+				imgCell.innerHTML = '<img src=\"'+link+'\"" width=100px height=100px>';
+				imgCell.className = 'results-td'
+
+			}
+		</script>
+	</head>
+	<body>
+		<header>
+			Student Enrollment Form
+		</header>
+
+		<div class="row">
+			<div class="column">
+				<form action="C:\Users\more\Desktop\task_4.html">
+					<table class="form-table">
+						<tr>
+							<td>
+								<label for="name">Name</label><br>
+							</td>
+							<td>
+								<input type="text" id="name" name="name"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="email">Email</label><br>
+							</td>
+							<td>
+								<input type="text" id="email" name="email">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="site">Website</label><br>
+							</td>
+							<td>
+								<input type="text" id="site" name="site">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="link">Image Link</label><br>
+							</td>
+							<td>
+								<input type="text" id="link" name="link">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="gender">Gender</label><br>
+							</td>
+							<td>
+								<input type="radio" id="male" name="gender" value="Male">
+								<label for="male">Male</label><br>
+								<input type="radio" id="female" name="gender" value="Female">
+								<label for="female">Female</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="skills">Skills</label>
+							</td>
+							<td>
+								<input type="checkbox" id="java" name="skills" value="Java">
+  								<label for="java">Java</label>
+								<input type="checkbox" id="html" name="skills" value="HTML">
+								<label for="html">HTML</label>
+								<input type="checkbox" id="css" name="skills" value="CSS">
+								<label for="css">CSS</label>
+							</td>
+						</tr>
+					</table>
+					<input type="button" value="Enroll Student" class="submit" onclick="enroll()">
+					<input type="reset" value="Clear" class="clear">
+				</form>
+			</div>
+			<div class="vl"></div>
+			<div class="column result">
+				<h2 class="partition-heading"><b>Enrolled Students</b></h2>
+				<br>
+				<table class="results" id="results">
+					<tr class="results-tr" id="table-head">
+						<th>Description</th>
+						<th>Image</th>
+					</tr>
+					
+				</table>
+			</div>
+			
+		</div>
+		  
+	</body>
+</html>
